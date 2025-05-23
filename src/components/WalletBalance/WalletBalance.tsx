@@ -27,6 +27,11 @@ export const WalletBalance: FC = () => {
     fetchBalance();
     const interval = setInterval(fetchBalance, 10000);
 
+    if (!userAddress) {
+      setBalance("0");
+      return;
+    }
+
     return () => clearInterval(interval);
   }, [userAddress]);
 
