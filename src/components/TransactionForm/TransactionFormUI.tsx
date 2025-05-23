@@ -8,6 +8,7 @@ interface TransactionFormUIProps {
   isLoading: boolean;
   error: string | null;
   transactionId: string | null;
+  isWaitingForTxHash: boolean;
   onRecipientChange: (value: string) => void;
   onAmountChange: (value: string) => void;
   onSendTransaction: () => void;
@@ -23,6 +24,7 @@ export const TransactionFormUI: FC<TransactionFormUIProps> = ({
   onRecipientChange,
   onAmountChange,
   onSendTransaction,
+  isWaitingForTxHash,
 }) => {
   return (
     <Card>
@@ -69,9 +71,16 @@ export const TransactionFormUI: FC<TransactionFormUIProps> = ({
 
             {error && <Text color="danger">{error}</Text>}
 
+            {isWaitingForTxHash && (
+              <div style={{ display: "flex", gap: "8px" }}>
+                <Spinner size="s" />
+                <Text>Waiting for transaction confirmation...</Text>
+              </div>
+            )}
+
             {transactionId && (
-              <div>
-                <Text>Transaction ID:</Text>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Text>Transaction Hash:</Text>
                 <Text style={{ wordBreak: "break-all" }}>{transactionId}</Text>
               </div>
             )}
