@@ -37,7 +37,7 @@ export const WalletBalance: FC = () => {
         {isLoading ? (
           <Spinner size="s" />
         ) : (
-          <Text style={{ fontSize: "24px", fontWeight: "bold" }}>
+          <Text size={24} weight="1">
             {balance} TON
           </Text>
         )}
