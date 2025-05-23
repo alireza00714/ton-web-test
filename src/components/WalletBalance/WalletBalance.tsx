@@ -27,26 +27,23 @@ export const WalletBalance: FC = () => {
     fetchBalance();
     const interval = setInterval(fetchBalance, 10000);
 
-    if (!userAddress) {
-      setBalance("0");
-      return;
-    }
-
     return () => clearInterval(interval);
   }, [userAddress]);
 
   return (
-    <Card>
-      <div style={{ padding: "16px", display: "flex", gap: "16px" }}>
-        <Text>Wallet Balance</Text>
-        {isLoading ? (
-          <Spinner size="s" />
-        ) : (
-          <Text size={24} weight="1">
-            {balance} TON
-          </Text>
-        )}
-      </div>
-    </Card>
+    userAddress && (
+      <Card>
+        <div style={{ padding: "16px", display: "flex", gap: "16px" }}>
+          <Text>Wallet Balance</Text>
+          {isLoading ? (
+            <Spinner size="s" />
+          ) : (
+            <Text size={24} weight="1">
+              {balance} TON
+            </Text>
+          )}
+        </div>
+      </Card>
+    )
   );
 };
